@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú - La Escondida</title>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Fredericka+the+Great&family=Caveat:wght@400;700&family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --chalk-dark: #1a1512;
+      --chalk-mid: #2a211c;
+      --chalk-board: #1e1915;
+      --gold: #f0b832;
+      --gold-light: #f7d06b;
+      --cream: #fef9ed;
+      --chalk-white: #f5f0e8;
+      --chalk-muted: #c8bfb0;
+      --wood: #8b5e3c;
+      --wood-dark: #5c3d20;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Raleway', sans-serif;
+      background: var(--chalk-dark);
+      color: var(--chalk-white);
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+
+    /* Top bar */
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .brand-block h1 {
+      font-family: 'Abril Fatface', serif;
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      color: var(--gold);
+      text-shadow: 2px 2px 0 rgba(0,0,0,0.4);
+      letter-spacing: 0.08em;
+      line-height: 1;
+    }
+    .brand-block .sub {
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+      color: var(--chalk-muted);
+      letter-spacing: 0.05em;
+      margin-top: 2px;
+    }
+    .chalk-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: #1a0e00;
+      padding: 12px 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+      box-shadow: 0 4px 0 rgba(0,0,0,0.3);
+    }
+    .chalk-btn:hover {
+      transform: translateY(-2px);
+      background: var(--gold-light);
+    }
+
+    /* HERO panel with photo */
+    .hero-board {
+      background: var(--chalk-board);
+      border: 14px solid var(--wood);
+      outline: 4px solid var(--wood-dark);
+      border-radius: 6px;
+      margin-bottom: 28px;
+      box-shadow: inset 0 0 60px rgba(0,0,0,0.4), 0 8px 32px rgba(0,0,0,0.6);
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 28px,
+          rgba(255,255,255,0.015) 28px,
+          rgba(255,255,255,0.015) 29px
+        );
+      overflow: hidden;
+      position: relative;
+    }
+
+    .board-badge {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      background: rgba(0,0,0,0.3);
+      text-align: center;
+      font-family: 'Caveat', cursive;
+      font-size: 0.85rem;
+      color: var(--gold-light);
+      letter-spacing: 0.15em;
+      padding: 6px;
+      border-bottom: 1px dashed rgba(255,255,255,0.1);
+    }
+
+    .hero-split {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      min-height: 340px;
+    }
+
+    .hero-photo {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(0.85) saturate(1.1);
+      display: block;
+    }
+    .photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        transparent 60%,
+        var(--chalk-board) 100%
+      );
+    }
+
+    .hero-content {
+      padding: 48px 32px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .hero-content h2 {
+      font-family: 'Fredericka the Great', serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      color: var(--gold);
+      letter-spacing: 0.06em;
+      margin-bottom: 10px;
+      text-shadow: 1px 1px 0 rgba(0,0,0,0.4);
+    }
+    .hero-content p {
+      color: var(--chalk-muted);
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+
+    .chalk-divider {
+      height: 2px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--chalk-muted) 0px,
+        var(--chalk-muted) 8px,
+        transparent 8px,
+        transparent 14px
+      );
+      margin: 18px 0;
+      opacity: 0.35;
+    }
+
+    /* MENU SECTION */
+    .menu-section-title {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .menu-section-title h2 {
+      font-family: 'Fredericka the Great', serif;
+      font-size: 2rem;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+    }
+    .menu-section-title .subtitle {
+      font-family: 'Caveat', cursive;
+      color: var(--chalk-muted);
+      font-size: 1rem;
+    }
+
+    /* DRINK CARDS with photo placeholder */
+    .drinks-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .drink-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+    .drink-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .drink-visual {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, var(--chalk-mid), #0f0d0b);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .drink-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.75) saturate(1.2);
+    }
+    .drink-visual-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        transparent 50%,
+        rgba(0,0,0,0.65) 100%
+      );
+    }
+    .drink-icon-fallback {
+      font-size: 3.5rem;
+      opacity: 0.7;
+    }
+
+    .drink-info {
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .drink-info strong {
+      font-family: 'Caveat', cursive;
+      font-size: 1.3rem;
+      color: var(--chalk-white);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .drink-info small {
+      color: var(--chalk-muted);
+      font-size: 0.87rem;
+      line-height: 1.4;
+    }
+    .drink-price {
+      font-family: 'Abril Fatface', serif;
+      font-size: 1.6rem;
+      color: var(--gold);
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    /* Shared photo card - use actual uploaded photo */
+    .photo-card-shared {
+      background: var(--chalk-board);
+      border: 12px solid var(--wood);
+      outline: 3px solid var(--wood-dark);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 28px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.5);
+    }
+    .photo-card-shared img {
+      width: 100%;
+      max-height: 380px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      filter: brightness(0.9) saturate(1.15);
+    }
+    .photo-card-shared .photo-caption {
+      background: rgba(0,0,0,0.4);
+      padding: 10px 16px;
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+      color: var(--gold-light);
+      letter-spacing: 0.06em;
+      text-align: center;
+    }
+
+    /* Full menu list */
+    .menu-list {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .menu-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      padding: 18px 22px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      align-items: center;
+    }
+    .menu-row:last-child { border-bottom: none; }
+    .menu-row-name {
+      font-family: 'Caveat', cursive;
+      font-size: 1.2rem;
+      color: var(--chalk-white);
+      margin-bottom: 3px;
+    }
+    .menu-row-desc {
+      color: var(--chalk-muted);
+      font-size: 0.88rem;
+    }
+    .menu-row-price {
+      font-family: 'Abril Fatface', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      text-align: right;
+    }
+
+    /* Footer */
+    .chalk-footer {
+      text-align: center;
+      padding: 20px;
+      font-family: 'Caveat', cursive;
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    @media (max-width: 700px) {
+      .hero-split { grid-template-columns: 1fr; }
+      .hero-photo { height: 200px; }
+      .photo-overlay { background: linear-gradient(180deg, transparent 40%, var(--chalk-board) 100%); }
+      .drinks-grid { grid-template-columns: 1fr; }
+      .topbar { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <!-- TOP NAV -->
+    <header class="topbar">
+      <div class="brand-block">
+        <h1>La Escondida</h1>
+        <div class="sub">Refrescos y micheladas con sabor auténtico</div>
+      </div>
+      <a href="index.html" class="chalk-btn">← Inicio</a>
+    </header>
+
+    <!-- DRINK CARDS - visual showcase -->
+    <section id="bebidas">
+      <div class="menu-section-title">
+        <div>
+          <h2>Nuestras Bebidas</h2>
+          <div class="subtitle">Precios cómodos • Sabor bien frío • 1 litro</div>
+        </div>
+      </div>
+
+      <div class="drinks-grid">
+        <!-- Card 1: Michelada -->
+        <div class="drink-card">
+          <div class="drink-visual">
+            <img src="assets/bebida1.jpg" alt="Michelada" style="object-position: left center;" />
+            <div class="drink-visual-overlay"></div>
+          </div>
+          <div class="drink-info">
+            <div>
+              <strong>Michelada</strong>
+              <small>Nuestra receta tradicional con cerveza, limón y salsas secretas.</small>
+            </div>
+            <div class="drink-price">$85</div>
+          </div>
+        </div>
+
+        <!-- Card 2: Caribeña -->
+        <div class="drink-card">
+          <div class="drink-visual">
+            <img src="assets/bebida2.jpg" alt="Caribeña" style="object-position: center center;" />
+            <div class="drink-visual-overlay"></div>
+          </div>
+          <div class="drink-info">
+            <div>
+              <strong>Caribeña</strong>
+              <small>Fresca y tropical, con jugo natural y un toque dulce.</small>
+            </div>
+            <div class="drink-price">$75</div>
+          </div>
+        </div>
+
+        <!-- Card 3: Azulito -->
+        <div class="drink-card">
+          <div class="drink-visual">
+            <img src="assets/bebida3.jpg" alt="Azulito" style="object-position: right center;" />
+            <div class="drink-visual-overlay"></div>
+          </div>
+          <div class="drink-info">
+            <div>
+              <strong>Azulito</strong>
+              <small>Colorida y divertida, el favorito para compartir con amigos.</small>
+            </div>
+            <div class="drink-price">$75</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <p class="chalk-footer">Todas nuestras bebidas salen más frías que el corazón de tu ex.</p>
+  </main>
+</body>
+</html>
